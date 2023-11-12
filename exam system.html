@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diwali Greetings</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #211b26;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 3em;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #fireworks-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+
+        .firework-red { background-color: #e44d26; }
+        .firework-orange { background-color: #ffa500; }
+        .firework-yellow { background-color: #ffd700; }
+        .firework-green { background-color: #00ff00; }
+        .firework-blue { background-color: #0000ff; }
+        .firework-purple { background-color: #800080; }
+
+        button {
+            background-color: #ffcc29;
+            color: #211b26;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.5s ease;
+            font-size: 1em;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #ffdb58;
+        }
+    </style>
+    <script>
+        var intervalId;
+
+        function startDiwaliCelebration() {
+            var greeting = document.getElementById('greeting');
+            greeting.style.opacity = 0;
+
+            intervalId = setInterval(createFireworkLoop, 1000);
+        }
+
+        function createFireworkLoop() {
+            var fireworksContainer = document.getElementById('fireworks-container');
+            fireworksContainer.innerHTML = ''; // Clear previous fireworks
+            for (var i = 0; i < 10; i++) {
+                createFirework();
+            }
+
+            setTimeout(function() {
+                var greeting = document.getElementById('greeting');
+                greeting.textContent = 'Happy Diwali! 🪔';
+                greeting.style.opacity = 1;
+            }, 1000);
+        }
+
+        function createFirework() {
+            var fireworksContainer = document.getElementById('fireworks-container');
+            var firework = document.createElement('div');
+            firework.className = 'firework';
+
+            var colors = ['firework-red', 'firework-orange', 'firework-yellow', 'firework-green', 'firework-blue', 'firework-purple'];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+            firework.classList.add(randomColor);
+
+            var randomX = Math.random() * (fireworksContainer.offsetWidth - 20); // Subtract 20 for padding
+            var randomY = Math.random() * (fireworksContainer.offsetHeight - 20); // Subtract 20 for padding
+
+            firework.style.left = randomX + 'px';
+            firework.style.top = randomY + 'px';
+
+            fireworksContainer.appendChild(firework);
+        }
+
+        function stopDiwaliCelebration() {
+            clearInterval(intervalId);
+
+            var fireworksContainer = document.getElementById('fireworks-container');
+            fireworksContainer.innerHTML = '';
+
+            var greeting = document.getElementById('greeting');
+            greeting.textContent = 'Diwali Greetings';
+            greeting.style.opacity = 1;
+        }
+    </script>
+</head>
+<body>
+    <h1 id="greeting">Diwali Greetings</h1>
+    <div id="fireworks-container"></div>
+    <button onclick="startDiwaliCelebration()">Celebrate Diwali</button>
+    <button onclick="stopDiwaliCelebration()">Stop Celebration</button>
+</body>
+</html>
+
+
+
+
